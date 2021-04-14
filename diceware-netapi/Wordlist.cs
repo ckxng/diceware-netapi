@@ -8,11 +8,18 @@ namespace diceware_netapi
     public class Wordlist
     {
         /// <summary>
-        /// Returns a single random word from the diceware list
+        /// Returns a single word with a specified dice sequence from the diceware list
         /// </summary>
-        public string Word
+        /// <param name="dice">a number between 11111 and 66666 where each digit is in the range 1-6</param>
+        /// <returns>a word from the diceware list</returns>
+        /// <exception cref="KeyNotFoundException">when invalid dice are provided</exception>
+        public string Word(int dice)
         {
-            get { return "word"; }
+            if(! Service.DiceRollValidatorService.Instance.CheckDiceRolls(dice))
+            {
+                throw new KeyNotFoundException("Invalid dice sequence, must be 11111-66666");
+            }
+            return "word";
         }
 
         /// <summary>
@@ -24,7 +31,7 @@ namespace diceware_netapi
         {
             for(int i = 0; i < num; i++)
             {
-                yield return this.Word;
+                yield return Word(Service.DiceRoller.Instance.FullSet());
             }
         }
 
