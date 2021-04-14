@@ -3,13 +3,22 @@ diceware-netapi
 
 This project demonstrates a Diceware passphrase generator as an ASP.NET Core API.
 
-Author
-======
+## Usage
+
+Open the project in Visual Studio 2019 and run the project using one of the 
+configured build targets.
+
+Example:
+
+    https://localhost:44317/generate?sep=^&words=12
+    
+    reshape^acre^october^goofball
+
+## Author
 
 [Cameron King](http://cameronking.me)
 
-License
-=======
+## License
 
 This software is released under the ISC License.
 
