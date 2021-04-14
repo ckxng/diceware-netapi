@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace diceware_netapi
 {
@@ -26,6 +27,9 @@ namespace diceware_netapi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<Models.WordlistDBContext>(
+                options => options.UseSqlite(Configuration.GetConnectionString("WordlistDBContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 
 namespace diceware_netapi.Service
 {
-    public class DiceRoller : IDiceRoller
+    public class DiceRollerService : IDiceRollerService
     {
-        static DiceRoller _instance;
+        static DiceRollerService _instance;
 
         private Random rand;
 
-        public static DiceRoller Instance
+        public static DiceRollerService Instance
         {
-            get { return _instance ??= new DiceRoller(); }
+            get { return _instance ??= new DiceRollerService(); }
         }
 
-        private DiceRoller()
+        private DiceRollerService()
         {
             rand = new Random();
         }

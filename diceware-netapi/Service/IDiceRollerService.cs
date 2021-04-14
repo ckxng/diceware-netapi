@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace diceware_netapi.Service
 {
-    interface IDiceRoller
+    interface IDiceRollerService
     {
         int Single();
 
