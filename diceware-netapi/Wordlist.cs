@@ -27,5 +27,16 @@ namespace diceware_netapi
                 yield return this.Word;
             }
         }
+
+        /// <summary>
+        /// generate a passphrase with num words
+        /// </summary>
+        /// <param name="words">the number of words in the passphrase</param>
+        /// <param name="sep">the string to place between words</param>
+        /// <returns>a passphrase with num words</returns>
+        public string Password(int words, string sep)
+        {
+            return String.Join(sep, Words(words));
+        }
     }
 }

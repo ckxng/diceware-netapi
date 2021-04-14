@@ -19,10 +19,16 @@ namespace diceware_netapi.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Return a new passphrase as a string
+        /// </summary>
+        /// <param name="words">how many words to include in the passphrase</param>
+        /// <param name="sep">the characters to place between words</param>
+        /// <returns>a passphrase</returns>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public string Get(int words = 8, string sep = "-")
         {
-            return new Wordlist().Words(5);
+            return new Wordlist().Password(words, sep);
         }
     }
 }
