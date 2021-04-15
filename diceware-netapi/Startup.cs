@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenTelemetry.Trace;
+using System.Diagnostics;
 
 namespace diceware_netapi
 {
@@ -40,9 +41,13 @@ namespace diceware_netapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Program.DicewareActivitySource = new ActivitySource(
+                Configuration.GetValue<string>("ActivitySourceName"));
+
             services.AddOpenTelemetryTracing(
                 (builder) => builder
                     .AddAspNetCoreInstrumentation()
+                    .AddSource(Configuration.GetValue<string>("ActivitySourceName"))
                     .AddJaegerExporter()
                 );
 

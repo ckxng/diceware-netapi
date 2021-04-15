@@ -34,23 +34,35 @@ namespace diceware_netapi.Controllers
             string passphrase = "";
             for (int i = 0; i < words; i++)
             {
-                if (i != 0)
-                {
-                    passphrase += sep;
-                }
+                using (var wordActivity = Program.DicewareActivitySource.StartActivity("GenerateWord"))
+                { 
+                    if (i != 0)
+                    {
+                        passphrase += sep;
+                    }
 
-                int roll = _roller.FullSet();
-                if (!_roller.CheckDiceRolls(roll))
-                {
-                    throw new Exception("Invalid dice sequence, must be 11111-66666");
-                }
+                    int roll;
+                    using (var rollActivity = Program.DicewareActivitySource.StartActivity("RollOneDice"))
+                    {
+                        roll = _roller.FullSet();
+                        if (!_roller.CheckDiceRolls(roll))
+                        {
+                            throw new Exception("Invalid dice sequence, must be 11111-66666");
+                        }
+                    }
 
-                Models.Wordlist result = _context.Wordlist.Find(roll);
-                if (result == null)
-                {
-                    throw new KeyNotFoundException("Dice entry missing from database");
+                    Models.Wordlist result;
+                    using (var lookupActivity = Program.DicewareActivitySource.StartActivity("LookupWord"))
+                    {
+                        result = _context.Wordlist.Find(roll);
+                        if (result == null)
+                        {
+                            throw new KeyNotFoundException("Dice entry missing from database");
+                        }
+                    }
+
+                    passphrase += result.Word;
                 }
-                passphrase += result.Word;
             }
             return passphrase;
         }
