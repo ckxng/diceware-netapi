@@ -44,8 +44,9 @@ namespace diceware_netapi
                 (builder) => builder
                     .AddAspNetCoreInstrumentation()
                     .AddJaegerExporter()
-                    .Build()
                 );
+
+            services.AddSingleton<Service.IDiceRollerService, Service.DiceRollerService>();
 
             services.AddControllers();
 

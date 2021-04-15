@@ -4,19 +4,26 @@ namespace diceware_netapi.Service
 {
     public class DiceRollerService : IDiceRollerService
     {
-        private static DiceRollerService _instance;
-
         private Random rand;
 
-        private DiceRollerService()
+        public DiceRollerService()
         {
             rand = new Random();
         }
 
-        public static DiceRollerService Instance
+        public bool CheckDiceRolls(int dice)
         {
-            get { return _instance ??= new DiceRollerService(); }
+            for (int i = 1; i <= 10000; i *= 10)
+            {
+                int place = (int)(dice / i) % 10;
+                if (place < 1 && place > 6)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
+
         public int FullSet()
         {
             int rolls = 0;

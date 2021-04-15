@@ -11,10 +11,15 @@ namespace diceware_netapi.Controllers
     {
         private readonly Models.WordlistDBContext _context;
         private readonly ILogger<GenerateController> _logger;
-        public GenerateController(ILogger<GenerateController> logger, Models.WordlistDBContext context)
+        private readonly Service.IDiceRollerService _roller;
+
+        public GenerateController(ILogger<GenerateController> logger,
+                                  Models.WordlistDBContext context,
+                                  Service.IDiceRollerService diceRollerService)
         {
             _logger = logger;
             _context = context;
+            _roller = diceRollerService;
         }
 
         /// <summary>
@@ -34,8 +39,8 @@ namespace diceware_netapi.Controllers
                     passphrase += sep;
                 }
 
-                int roll = Service.DiceRollerService.Instance.FullSet();
-                if (!Service.DiceRollValidatorService.Instance.CheckDiceRolls(roll))
+                int roll = _roller.FullSet();
+                if (!_roller.CheckDiceRolls(roll))
                 {
                     throw new Exception("Invalid dice sequence, must be 11111-66666");
                 }
