@@ -14,6 +14,10 @@ Example:
     
     reshape^acre^october^goofball
 
+## Observability
+
+Telemetry is set to Jaeger on the local system, if it is running.
+
 ## Author
 
 [Cameron King](http://cameronking.me)
