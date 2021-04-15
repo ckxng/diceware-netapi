@@ -18,6 +18,16 @@ Example:
 
 Telemetry is set to Jaeger on the local system, if it is running.
 
+Using this data, we are able to make observations such as the following:
+
+- The first API call typically takes twice a long to complete
+  - The bootstrapping period for the first API call takes 100x longer than subsequent calls
+  - The first database lookup of the first API call takes 25x longer than the first database lookup in subsequent calls
+- Even in subsequent calls, the first database lookup of the call takes 17 times longer than subsequent calls within the same request
+- The dice roll itself is nealy instantaneous
+
+Based on this, if we were to create an in-memory cache of the word database, we could expect to substancially speed up the responsiveness of the application.
+
 ## Author
 
 [Cameron King](http://cameronking.me)
