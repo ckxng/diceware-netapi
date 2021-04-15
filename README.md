@@ -10,7 +10,7 @@ configured build targets.
 
 Example:
 
-    https://localhost:44317/generate?sep=^&words=12
+    https://localhost:44317/generate?sep=^&words=4
     
     reshape^acre^october^goofball
 
