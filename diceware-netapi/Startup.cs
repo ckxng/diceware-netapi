@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using OpenTelemetry.Trace;
 
 namespace diceware_netapi
 {
@@ -26,6 +27,14 @@ namespace diceware_netapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddOpenTelemetryTracing(
+                (builder) => builder
+                    .AddAspNetCoreInstrumentation()
+                    .AddJaegerExporter()
+                    .Build()
+                );
+
             services.AddControllers();
 
             services.AddDbContext<Models.WordlistDBContext>(
