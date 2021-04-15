@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace diceware_netapi.Service
+﻿namespace diceware_netapi.Service
 {
     public class DiceRollValidatorService : IDiceRollValidatorService
     {
-        static DiceRollValidatorService _instance;
+        private static DiceRollValidatorService _instance;
+
+        private DiceRollValidatorService()
+        {
+        }
 
         public static DiceRollValidatorService Instance
         {
             get { return _instance ??= new DiceRollValidatorService(); }
         }
-
-        private DiceRollValidatorService()
-        {
-
-        }
-
         public bool CheckDiceRolls(int dice)
         {
             for (int i = 1; i <= 10000; i *= 10)

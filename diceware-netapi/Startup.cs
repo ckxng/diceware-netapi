@@ -1,16 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using OpenTelemetry.Trace;
 
 namespace diceware_netapi
@@ -23,23 +16,6 @@ namespace diceware_netapi
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-
-            services.AddOpenTelemetryTracing(
-                (builder) => builder
-                    .AddAspNetCoreInstrumentation()
-                    .AddJaegerExporter()
-                    .Build()
-                );
-
-            services.AddControllers();
-
-            services.AddDbContext<Models.WordlistDBContext>(
-                options => options.UseSqlite(Configuration.GetConnectionString("WordlistDBContext")));
-        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -59,6 +35,22 @@ namespace diceware_netapi
             {
                 endpoints.MapControllers();
             });
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddOpenTelemetryTracing(
+                (builder) => builder
+                    .AddAspNetCoreInstrumentation()
+                    .AddJaegerExporter()
+                    .Build()
+                );
+
+            services.AddControllers();
+
+            services.AddDbContext<Models.WordlistDBContext>(
+                options => options.UseSqlite(Configuration.GetConnectionString("WordlistDBContext")));
         }
     }
 }
