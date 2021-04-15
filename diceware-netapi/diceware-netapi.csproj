@@ -5,6 +5,14 @@
     <RootNamespace>diceware_netapi</RootNamespace>
     <UserSecretsId>cd8cb024-ed37-41cb-96ec-5a4cd561ab8a</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <Authors>Cameron King</Authors>
+    <Company>Cameron King</Company>
+    <Copyright>Copyright (c) 2021, Cameron King.</Copyright>
+    <Description>This project demonstrates a Diceware passphrase generator as an ASP.NET Core API.</Description>
+    <PackageProjectUrl>https://github.com/ckxng/diceware-netapi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ckxng/diceware-netapi.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +29,13 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 

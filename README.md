@@ -26,4 +26,4 @@ Telemetry is set to Jaeger on the local system, if it is running.
 
 This software is released under the ISC License.
 
-See `LICENSE` file for details.
+See `LICENSE.txt` file for details.
