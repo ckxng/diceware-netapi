@@ -26,7 +26,7 @@ Using this data, we are able to make observations such as the following:
 - Even in subsequent calls, the first database lookup of the call takes 17 times longer than subsequent calls within the same request
 - The dice roll itself is nealy instantaneous
 
-Based on this, if we were to create an in-memory cache of the word database, we could expect to substancially speed up the responsiveness of the application.
+Based on this, if we were to create an in-memory cache of the word database, we could expect to substancially speed up the responsiveness of the application.  Without using an in-memory cache, we could also speed up execution by a small amount using a singleton database object that doesn't need to be re-initialized with each subsequent API call.
 
 ## Author
 
