@@ -1,3 +1,5 @@
+[![.NET](https://github.com/ckxng/diceware-netapi/actions/workflows/dotnet.yml/badge.svg)](https://github.com/ckxng/diceware-netapi/actions/workflows/dotnet.yml)
+
 diceware-netapi
 ===============
 
